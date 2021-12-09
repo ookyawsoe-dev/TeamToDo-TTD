@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>articles</title>
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <table class="table" id="datatable" display="100%">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Article Name</th>
+                            <th>About Article</th>
+                            <th>Creater Name</th>
+                            <th>Created Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%
+              data.forEach((user, index)=> {
+              %>
+                        <tr>
+                            <td><%= user.article_id %></td>
+                            <td><%= user.article_name %></td>
+                            <td><%= user.about_article %></td>
+                            <td><%= user.creater_name %></td>
+                            <td><%= user.created_date %></td>
+                        </tr>
+                        <%
+              });
+              %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

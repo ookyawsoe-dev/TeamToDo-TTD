@@ -1,1 +1,11 @@
-# TeamToDo-TTD
+#TEAMTODO 
+
+master => aung si thu
+
+minor project for practice nodejs and learn dml ddl
+
+##Usage <br>
+Database => MYSQL  <br>
+Pattern => MVC <br>
+Framework => expressjs <br>
+View Template => EJS
