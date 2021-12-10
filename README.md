@@ -1,6 +1,5 @@
 #TEAMTODO 
 
-master => aung si thu
 
 minor project for practice nodejs and learn dml ddl
 
