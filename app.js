@@ -3,11 +3,11 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+var expressLayouts = require('express-ejs-layouts');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var articleRouter = require('./routes/article');
-
+var commentRouter = require('./routes/commentRouter');
 var app = express();
 
 // view engine setup
@@ -20,9 +20,16 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//layout setup
+app.use(expressLayouts);
+app.set('layout','layouts/default');
+
+// routes middleware
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/readarticle', articleRouter);
+app.use('/articles', articleRouter);
+app.use ('/comments', commentRouter);
+
 
 
 // catch 404 and forward to error handler
