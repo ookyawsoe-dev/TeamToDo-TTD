@@ -32,3 +32,18 @@ exports.readarticle = (callback) => {
     );
 
 };
+
+// add article
+exports.addarticle = (callback) => {
+    connection.query(
+        `INSERT INTO article (article_id, userid, article_content, article_role, article_created_date) VALUES ( ?, ?, ?, ?, CURRENT_TIMESTAMP())`,
+        (err, results) => {
+            if (err) {
+                console.log(err);
+            }
+            console.log(results);
+            callback(err, results);
+        }
+    );
+
+};

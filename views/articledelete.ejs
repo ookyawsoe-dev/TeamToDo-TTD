@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/css/bootstrap.min.css' />
+  </head>
+  <body class="d-flex flex-column h-100">
+    
+    <%- include('./common/header.ejs') %>
+
+    <!-- Begin page content -->
+    <main class="flex-shrink-0">
+      <div class="container">
+        <h1><%= title %></h1>
+        <table class="table">
+            <tr>
+                <td>Full Name</td>
+                <td><%= detail.full_name %></td>
+            </tr>
+            <tr>
+                <td>Father Name</td>
+                <td><%= detail.father_name %></td>
+            </tr>
+            <tr>
+                <td>DOB</td>
+                <td><%= detail.dob %></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <form id="frm" method="POST">
+                        <input type="submit" id="btnDelete" value="Delete" class="btn btn-primary">
+                        <a href="/user" class="btn btn-info">Cancel</a>
+                    </form>
+                </td>
+            </tr>
+        </table>
+      </div>
+    </main>
+    
+    <%- include('./common/footer.ejs') %>
+  </body>
+</html>
