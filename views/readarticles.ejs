@@ -17,11 +17,11 @@
                 <table class="table" id="datatable" display="100%">
                     <thead>
                         <tr>
-                            <th>Id</th>
-                            <th>Article Name</th>
-                            <th>About Article</th>
-                            <th>Creater Name</th>
-                            <th>Created Date</th>
+                            <th>Article ID</th>
+                            <th>User ID</th>
+                            <th>Article Content</th>
+                            <th>Article Role</th>
+                            <th>Article Created Date</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -30,10 +30,10 @@
               %>
                         <tr>
                             <td><%= user.article_id %></td>
-                            <td><%= user.article_name %></td>
-                            <td><%= user.about_article %></td>
-                            <td><%= user.creater_name %></td>
-                            <td><%= user.created_date %></td>
+                            <td><%= user.userid %></td>
+                            <td><%= user.article_content %></td>
+                            <td><%= user.article_role %></td>
+                            <td><%= user.article_created_date %></td>
                         </tr>
                         <%
               });

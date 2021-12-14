@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Article</title>
+    <link rel="stylesheet" href="../public/stylesheets/bootstrap.min.css">
+    <link rel="stylesheet" href="../public/stylesheets/newarticle.css">
+</head>
+<body>
+  <nav class="navbar justify-content-between navbar-light bg-light ">
+    <div class="ms-3">
+        <a class="navbar-brand ms-5 py-3 fs-3" href="#"><img src="../public/images/todo.png" alt="BrandPhoto" width="50px" height="auto"></a>
+        <span class="fs-3">TEAMTODO</span>
+    </div>
+    <div class="logout me-5">
+        <a href="#" class="btn btn-secondary">LOGOUT</a>
+    </div>    
+  </nav> 
+  <form action="" class="mx-auto">
+    <div class="mb-3 col-lg-3">
+      <label for="userid" class="form-label">User ID</label>
+      <input type="text" class="form-control" id="userid">
+    </div>
+    <div class="mb-3">
+      <label for="content" class="form-label">Write Your Content Here ...</label>
+      <textarea class="form-control" id="content" rows="15"></textarea>
+    </div>
+    <div class="text-center">
+      <button type="button" class="btn btn-primary">Add Article</button>
+      <button type="button" class="btn btn-secondary">Cancel</button>
+    </div>
+  </form>
+</body>
+</html>
