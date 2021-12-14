@@ -1,11 +1,330 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team To Do</title>
+    <link rel = "icon" href ="todo.png" type = "image/x-icon">
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="stylesheets/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+  
+    </style>
+    </head>
+<body>
+  <!--Nav bar for client side-->
+    <nav class="navbar justify-content-between navbar-light bg-light ">
+        <div class="ms-3">
+            <a class="navbar-brand ms-5 py-3 fs-3" href="#"><img src="images/todo.png" alt="BrandPhoto" width="50px" height="auto"></a>
+            <span class="fs-3">TEAMTODO</span>
+        </div>
+        <div class="logout me-5">
+            <span class="fs-1"><i class="fas fa-user-circle"></i></span>
+        </div>  
+    </nav>
+   
+   <section class="hero py-3">
+    <div class="row mx-2">
+      <!-- Todo Part-->
+        <div class="todo col-4 ">
+                <nav class="navbar justify-content-between">
+                    <h3 >TODO</h3>
+                    <div class="addArticle me-3">
+                        <a href="#" class="btn btn-primary">Add Article</a>
+                    </div>
+                </nav>
+                              
+                <div class="article my-2 ">
+                    <div class="row articleNav">
+                        <div class="col-8">
+                            <div class="row userArticle">
+                                <div class="col-2 mt-2">
+                                    <img src="images/unknown.png" alt="unknown profile" width="30px" height="30px">
+                                </div>
+                                <div class="col-9">
+                                    <span class="fw-bold">Aung Si Thu</span> <br>
+                                    <span>Admin</span> &nbsp;
+                                    <i >3 hours ago</i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="dropdown ">
+                                <span class="dropdown-toggle text-end d-block fs-3" id="dropdownMenuButton" data-bs-toggle="dropdown" >
+                                </span>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="#">process</a>
+                                    <a class="dropdown-item" href="#">done</a>
+                                    <a class="dropdown-item" href="#">edit</a>
+                                    <a class="dropdown-item" href="#">delete</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="articleContent ms-5">
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                            Sunt voluptate, architecto hic ea cupiditate nihil consectetur
+                             dolor eaque exercitationem quo aliquid non tenetur consequuntur
+                              laboriosam neque corrupti numquam pariatur corporis.
+                        </p>
+                        
+                    </div>
+                    <div class="text-end commentBtn">
+                        <button class="btn btn-info me-2" id="comment_articleId">Comment</button>
+                    </div>
+                    <div class="articleCommentSection row ms-4 px-2 my-1 d-none">
+                        <div class="row addarticle py-1">
+                            <div class="col-1">
+                                <img src="images/unknown.png" alt="profile photo" width="25px" height="25px">
+                            </div>
+                            <div class="col-11 addComment">
+                                <button class="addCommentBtn w-100 text-start" id="addComment">Comment here !</button>
+                                <form action="" class="form d-none">
+                                    <textarea name="newcomment" id="newcomment" cols="30" rows="4" class="form-control" placeholder="Comment here"></textarea> <br>
+                                    <input type="submit" value="Send" class="btn btn-success">
+                                    <button class="btn btn-primary commentCancel">Cancel</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="articleComment my-2">
+                            <div class="row articleNav ">
+                                <div class="col-8">
+                                    <div class="row userComment">
+                                        <div class="col-2 mt-2">
+                                            <img src="images/unknown.png" alt="unknown profile" width="20px" height="20px">
+                                        </div>
+                                        <div class="col-9">
+                                            <span class="fw-bold">Kyaw Soe</span> <br>
+                                            <span>Admin</span> &nbsp;
+                                            <i >3 hours ago</i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="dropdown ">
+                                        <span class="dropdown-toggle text-end d-block fs-3" id="dropdownMenuButton" data-bs-toggle="dropdown" >
+                                        </span>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="#">edit</a>
+                                            <a class="dropdown-item" href="#">delete</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="articleContent ms-4 py-1">
+                                <p>
+                                    Lorem ipsum dolor sit, amet consectetur adipisicing elits tenetur vel ipsam, quis, dolorem laboreatae!
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>      
+                </div>
+                <hr>
+        </div>
+      <!-- Process Part-->
+        <div class="process col-4 ">
+            <nav class="navbar ">
+                <h3 >PROCESS</h3>
+            </nav>
+                          
+            <div class="article my-2 ">
+                <div class="row articleNav">
+                    <div class="col-8">
+                        <div class="row userArticle">
+                            <div class="col-2 mt-2">
+                                <img src="images/unknown.png" alt="unknown profile" width="30px" height="30px">
+                            </div>
+                            <div class="col-9">
+                                <span class="fw-bold">U Kyaw Soe</span> <br>
+                                <span>myo chay lin</span> &nbsp;
+                                <i >3 month agos</i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="dropdown ">
+                            <span class="dropdown-toggle text-end d-block fs-3" id="dropdownMenuButton" data-bs-toggle="dropdown" >
+                            </span>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">todo</a>
+                                <a class="dropdown-item" href="#">done</a>
+                                <a class="dropdown-item" href="#">edit</a>
+                                <a class="dropdown-item" href="#">delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="articleContent ms-5">
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                        Sunt voluptate, architecto hic ea cupiditate nihil consectetur
+                         dolor eaque exercitationem quo aliquid non tenetur consequuntur
+                          laboriosam neque corrupti numquam pariatur corporis.
+                    </p>
+                    <div class="text-end">
+                        <button class="btn btn-info me-2">Comment</button>
+                    </div>
+                </div>
+                <div class="articleCommentSection row ms-4 px-2 my-1">
+                    <div class="row addarticle py-1">
+                        <div class="col-1">
+                            <img src="images/unknown.png" alt="profile photo" width="25px" height="25px">
+                        </div>
+                        <div class="col-11">
+                            <button class="addCommentBtn w-100 text-start">Comment here !</button>
+                        </div>
+                    </div>
+                    <div class="articleComment my-2">
+                        <div class="row articleNav">
+                            <div class="col-8">
+                                <div class="row userComment">
+                                    <div class="col-2 mt-2">
+                                        <img src="images/unknown.png" alt="unknown profile" width="20px" height="20px">
+                                    </div>
+                                    <div class="col-9">
+                                        <span class="fw-bold">Aung Si Thu</span> <br>
+                                        <span>Admin</span> &nbsp;
+                                        <i >3 minute ago</i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="dropdown ">
+                                    <span class="dropdown-toggle text-end d-block fs-3" id="dropdownMenuButton" data-bs-toggle="dropdown" >
+                                    </span>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="#">edit</a>
+                                        <a class="dropdown-item" href="#">delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="articleContent ms-4 py-1">
+                            <p>
+                                Lorem ipsum dolor sit, amet consectetur adipisicing elits tenetur vel ipsam, quis, dolorem laboreatae!
+                            </p>
+                        </div>
+                    </div>
+
+                </div>      
+            </div>
+            <hr>
+       </div>
+      <!-- Done Part-->
+       <div class="done col-4 ">
+        <nav class="navbar ">
+            <h3 >Done</h3>
+           
+        </nav>
+                      
+        <div class="article my-2 ">
+            <div class="row articleNav">
+                <div class="col-8">
+                    <div class="row userArticle">
+                        <div class="col-2 mt-2">
+                            <img src="images/unknown.png" alt="unknown profile" width="30px" height="30px">
+                        </div>
+                        <div class="col-9">
+                            <span class="fw-bold">Ko Japna Chay</span> <br>
+                            <span>Enminem</span> &nbsp;
+                            <i >1 hours ago</i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="dropdown ">
+                        <span class="dropdown-toggle text-end d-block fs-3" id="dropdownMenuButton" data-bs-toggle="dropdown" >
+                        </span>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">process</a>
+                            <a class="dropdown-item" href="#">todo</a>
+                            <a class="dropdown-item" href="#">edit</a>
+                            <a class="dropdown-item" href="#">delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="articleContent ms-5">
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                    Sunt voluptate, architecto hic ea cupiditate nihil consectetur
+                     dolor eaque exercitationem quo aliquid non tenetur consequuntur
+                      laboriosam neque corrupti numquam pariatur corporis.
+                </p>
+                <div class="text-end">
+                    <button class="btn btn-info me-2">Comment</button>
+                </div>
+            </div>
+            <div class="articleCommentSection row ms-4 px-2 my-1">
+                <div class="row addarticle py-1">
+                    <div class="col-1">
+                        <img src="images/unknown.png" alt="profile photo" width="25px" height="25px">
+                    </div>
+                    <div class="col-11">
+                        <button class="addCommentBtn w-100 text-start">Comment here !</button>
+                    </div>
+                </div>
+                <div class="articleComment my-2">
+                    <div class="row articleNav">
+                        <div class="col-8">
+                            <div class="row userComment">
+                                <div class="col-2 mt-2">
+                                    <img src="images/unknown.png" alt="unknown profile" width="20px" height="20px">
+                                </div>
+                                <div class="col-9">
+                                    <span class="fw-bold">Kyaw Soe</span> <br>
+                                    <span>Admin</span> &nbsp;
+                                    <i >3 hours ago</i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="dropdown ">
+                                <span class="dropdown-toggle text-end d-block fs-3" id="dropdownMenuButton" data-bs-toggle="dropdown" >
+                                </span>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="#">edit</a>
+                                    <a class="dropdown-item" href="#">delete</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="articleContent ms-4 py-1">
+                        <p>
+                            Lorem ipsum dolor sit, amet consectetur adipisicing elits tenetur vel ipsam, quis, dolorem laboreatae!
+                        </p>
+                    </div>
+                </div>
+
+            </div>      
+        </div>
+        <hr>
+       </div>
+    </div>
+   </section>
+    <script src="javascripts/bootstrap.min.js"></script>
+    <script src="javascripts/jquery.min.js"></script>
+    <script>
+        $(document).ready(() => {
+            //comment show
+            $("#comment_articleId").click((e) => {
+                $(".commentBtn+div").toggleClass('d-none');
+            })
+            $("#addComment").click((e) => {
+                $("#addComment+form").toggleClass('d-none');
+                $("#addComment").toggleClass('d-none');
+            })
+            $(".commentCancel").click((e) => {
+                $("#addComment").toggleClass('d-none');
+                $("#addComment+form").toggleClass('d-none');
+            })
+        })
+    </script>
+</body>
 </html>
