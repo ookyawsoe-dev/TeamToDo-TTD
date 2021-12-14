@@ -7,7 +7,7 @@ var expressLayouts = require('express-ejs-layouts');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var articleRouter = require('./routes/article');
-var commentRouter = require('./routes/commentRouter');
+// var commentRouter = require('./routes/commentRouter');
 var app = express();
 
 // view engine setup
@@ -28,7 +28,7 @@ app.set('layout','layouts/default');
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/articles', articleRouter);
-app.use ('/comments', commentRouter);
+// app.use ('/comments', commentRouter);
 
 
 
