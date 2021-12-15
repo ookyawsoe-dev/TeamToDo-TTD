@@ -6,7 +6,7 @@
   </head>
   <body class="d-flex flex-column h-100">
     
-    <%- include('./common/header.ejs') %>
+    <%- include('./common/nav.ejs') %>
 
     <!-- Begin page content -->
     <main class="flex-shrink-0">
@@ -14,16 +14,12 @@
         <h1><%= title %></h1>
         <table class="table">
             <tr>
-                <td>Full Name</td>
-                <td><%= detail.full_name %></td>
+                <td>Article ID</td>
+                <td><%= detail.article_id%></td>
             </tr>
             <tr>
-                <td>Father Name</td>
-                <td><%= detail.father_name %></td>
-            </tr>
-            <tr>
-                <td>DOB</td>
-                <td><%= detail.dob %></td>
+                <td>Article Content</td>
+                <td><%= detail.article_content %></td>
             </tr>
             <tr>
                 <td colspan="2">
@@ -37,6 +33,5 @@
       </div>
     </main>
     
-    <%- include('./common/footer.ejs') %>
   </body>
 </html>

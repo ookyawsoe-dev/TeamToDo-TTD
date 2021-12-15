@@ -1,5 +1,5 @@
 const mysql = require('mysql2');
-const { connect } = require('../routes');
+const { connect, param } = require('../routes');
 require('dotenv').config();
 // create the connection to database
 const connection = mysql.createConnection({
@@ -34,16 +34,26 @@ exports.readarticle = (callback) => {
 };
 
 // add article
-exports.addarticle = (callback) => {
+exports.addarticle = (params, callback) => {
+   connection.query(`INSERT INTO article(article_id, userid, article_content,article_role, article_created_date) VALUES (null, ${ params.userid }, ${ params.article_content }, "todo", CURRENT_TIMESTAMP())`, (err, results) => {
+    if(err){
+        console.log(err);
+    }else{
+        console.log(results);
+    }
+   });
+};
+
+// delete article
+exports.deletearticle = (article_id, callback) => {
     connection.query(
-        `INSERT INTO article (article_id, userid, article_content, article_role, article_created_date) VALUES ( ?, ?, ?, ?, CURRENT_TIMESTAMP())`,
-        (err, results) => {
-            if (err) {
+        `DELETE FROM article WHERE article_id = ? `, [article_id],
+        (err, result) => {
+            if(err) {
                 console.log(err);
             }
-            console.log(results);
-            callback(err, results);
+            
+            callback(err, result);
         }
     );
-
-};
+}
