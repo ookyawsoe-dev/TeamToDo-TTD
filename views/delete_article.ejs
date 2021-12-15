@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/css/bootstrap.min.css' />
+  </head>
+  <body class="d-flex flex-column h-100">
+    
+    <%- include('./common/nav.ejs') %>
+
+    <!-- Begin page content -->
+    <main class="flex-shrink-0">
+      <div class="container">
+        <h1><%= title %></h1>
+        <table class="table">
+            <tr>
+                <td>Article ID</td>
+                <td><%= detail.article_id%></td>
+            </tr>
+            <tr>
+                <td>Article Content</td>
+                <td><%= detail.article_content %></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <form id="frm" method="POST">
+                        <input type="submit" id="btnDelete" value="Delete" class="btn btn-primary">
+                        <a href="/user" class="btn btn-info">Cancel</a>
+                    </form>
+                </td>
+            </tr>
+        </table>
+      </div>
+    </main>
+    
+  </body>
+</html>
