@@ -3,12 +3,40 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var dotenv = require('dotenv');
+dotenv.config();
+var session = require('express-session');
+var MySQLStore = require('express-mysql-session')(session);
+var mysql2 = require('mysql2/promise');
 var expressLayouts = require('express-ejs-layouts');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var articleRouter = require('./routes/article');
 var commentRouter = require('./routes/comment');
 var app = express();
+
+
+var options = {
+  host: process.env.DB_HOST ,
+  port:  process.env.DB_PORT,
+  user:  process.env.DB_USER,
+  password:  process.env.DB_PASS,
+  database:  process.env.DB_NAME
+};
+
+var connection = mysql2.createPool(options);
+
+//session
+var sessionStore = new MySQLStore({}, connection);
+
+// Session Management
+app.use(session({
+  name: 'tdd_id',
+  secret: 'tdd2021',
+  resave: false,
+  store: sessionStore,
+  saveUninitialized: true,
+}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

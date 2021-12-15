@@ -9,7 +9,17 @@ p{
 }
 .todo,.process,.done{
   border-right: 1px solid gray;
-  max-height: 90vh;
+  max-height: 80vh;
+  overflow-y: scroll;
+}
+.article{
+  border: 3px solid gray;
+  background-color: rgb(248, 249, 250);
+  border-radius: 20px;
+  padding: 10px;
+}
+.articleComment{
+  border-radius: 10px ;
 }
 .addCommentBtn{
   border:1px solid rgb(91, 91, 209);

@@ -1,13 +1,17 @@
 const mysql = require('mysql2');
-const { connect, param } = require('../routes');
-require('dotenv').config();
+const dotenv = require('dotenv');
+dotenv.config();
+
+
 // create the connection to database
 const connection = mysql.createConnection({
     host: process.env.DB_HOST,
-    user: process.env.DB_USER,
     database: process.env.DB_NAME,
-    password: process.env.DB_PASS
-  })
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    multipleStatements : true
+});
+
 
 //connection testing
 connection.connect((error) => {
@@ -18,19 +22,17 @@ connection.connect((error) => {
     }
 });
 
+
+
 // read article
 exports.readarticle = (callback) => {
-    connection.query(
-        `SELECT article_id, userid, article_content, article_role, DATE_FORMAT(article_created_date, "%Y-%m-%d") as article_created_date FROM article`,
-        (err, results) => {
-            if (err) {
-                console.log(err);
-            }
-            console.log(results);
-            callback(err, results);
+    connection.query('SELECT article.article_id, article.userid, article.article_content, article.article_role, article.article_created_date, user.user_name,user.user_role FROM article INNER JOIN user ON article.article_id=user.user_id', (err, result)=>{ 
+        if(err){
+            console.log(err);
+        }else{
+            callback(err, result);
         }
-    );
-
+    });
 };
 
 // add article
@@ -57,3 +59,4 @@ exports.deletearticle = (article_id, callback) => {
         }
     );
 }
+
