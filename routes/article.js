@@ -6,8 +6,6 @@ var articleController = require('../controller/articleController');
 router.get('/', articleController.showarticle);
 router.get('/add', articleController.addarticle);
 router.post('/add', articleController.addarticle);
-// router.get('/deletearticle/:id', articleController.deletearticle);
-// router.post('/deletearticle/:id', articleController.deletearticle)
 router.get('/todo/:id', articleController.todo);
 router.get('/process/:id', articleController.process);
 router.get('/done/:id', articleController.done);

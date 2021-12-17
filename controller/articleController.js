@@ -125,6 +125,7 @@ exports.delete = (req, res) => {
 // edit
 exports.edit = (req, res) => {
     const id = req.params.id;
+    var article_content = req.body.article_content;
     if(req.method == "GET") {
         articleModel.editForm(id, (err, results) => {
             if(err){
@@ -134,7 +135,7 @@ exports.edit = (req, res) => {
             }
         })
     }else{
-        articleModel.edit(id, (err, results) => {
+        articleModel.edit(id,article_content, (err, results) => {
             if(err){
                 console.log(err);
             }else{
