@@ -1,6 +1,6 @@
 const articleModel = require('../model/articleModel');
 const commentModel = require('../model/commentModel')
-
+const auth = require('../Middleware/checkAuth');
 
 // index file rendering
 exports.readarticle = (req, res, next) => {
@@ -18,7 +18,7 @@ exports.readarticle = (req, res, next) => {
                     res.render('index', { article: article, comment : comment, profile : profile, layout : false});
                 }
             })
-        }
+        } 
     })
 }
 
