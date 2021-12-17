@@ -18,10 +18,11 @@ exports.addarticle = (req, res, next) => {
         res.render('add_article',{layout : false});
     }else{
         articleModel.addarticle(params, (err, results) => {
-            if(err){
+            if(err) {
                 console.log(err);
             }else{
-                res.redirect('/', { data : results });
+                console.log("Testing Redirect");
+                res.redirect('/article');
             }
         });
     }
@@ -33,7 +34,7 @@ exports.deletearticle = (req, res) => {
     const article_id = req.params.article_id;
     console.log("Method Name: ", req.method);
     if(req.method == "GET") {
-        articleModel.readarticle(article_id, (err, result) => {
+        articleModel.articleDetail(article_id, (err, result) => {
             res.render('delete_article', { title: "Article Delete", detail: result});
         })
     }else {

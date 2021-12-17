@@ -35,7 +35,7 @@ exports.readarticle = (callback) => {
 
 // add article
 exports.addarticle = (params, callback) => {
-   connection.query(`INSERT INTO article(article_id, userid, article_content,article_role, article_created_date) VALUES (null, ${ params.userid }, ${ params.article_content }, "todo", CURRENT_TIMESTAMP())`, (err, results) => {
+   connection.query(`INSERT INTO article(article_id, userid, article_content,article_role, article_created_date) VALUES (null, ${ params.userid }, "${ params.article_content }", "todo", CURRENT_TIMESTAMP())`, (err, results) => {
     if(err){
         console.log(err);
     }else{
@@ -43,6 +43,24 @@ exports.addarticle = (params, callback) => {
     }
    });
 };
+
+exports.articleDetail = (id, callback) => {
+    connection.query(
+        `SELECT article_id, userid, article_content, article_role, article_created_date FROM article WHERE article_id = ? `,
+        [article_id],
+        (err, result) => {
+            if(err) {
+                console.log(err);
+            }
+            var row = null;
+            if(result.length > 0) {
+                row = result[0];
+            }
+            callback(err, row);
+        }
+    );
+}
+
 
 // delete article
 exports.deletearticle = (article_id, callback) => {
