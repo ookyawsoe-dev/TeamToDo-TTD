@@ -158,12 +158,9 @@ exports.editForm =(id, callback)=>{
     })
 }
 // edit
-exports.edit = (id, updateData, callback) => {
-    if(updateData.article_content){
-        article_content = updateData.article_content;
-    }
+exports.edit = (id,article_content, callback) => {
     connection.query(
-        `UPDATE article SET ? WHERE article_id = ?`,[article_content, id],
+        `UPDATE article SET article_content = ? WHERE article_id = ?`,[article_content,id],
         (err, results) => {
             if(err){
                 console.log(err);
