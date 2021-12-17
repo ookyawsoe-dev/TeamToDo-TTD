@@ -54,7 +54,7 @@ app.set('layout','layouts/default');
 // routes middleware
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/articles', articleRouter);
+app.use('/article', articleRouter);
 app.use ('/comments', commentRouter);
 
 
