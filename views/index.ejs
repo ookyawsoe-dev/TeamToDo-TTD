@@ -16,6 +16,20 @@
 </head>
 
 <body>
+  <!-- Side Nav for profile-->
+  <div id="mySidenav" class="sidenav gy-4">
+    <a href="#" class="closebtn fs-3" onclick="closeNav()"><i class="fas fa-window-close "></i></a>
+    <img src="images/unknown.png" alt="profile" width="100px" height="100px" class="rounded-circle">
+    <div class="px-5 py-5">
+      <ul class="list-group bg-secondary">
+        <li class="list-group-item"><%= profile.name%></li>
+        <li class="list-group-item"><%= profile.email%>n</li>
+        <li class="list-group-item"><%= profile.user_role%></li>
+      </ul>
+    </div>
+    <a href="/logout" class="" >Logout</a>
+    ‌<a href="https://oxythu.github.io" onclick="closeNav()" class="">Porfolio</a>
+</div>
   <!--Nav bar for client side-->
   <nav class="navbar justify-content-between navbar-light bg-light ">
     <div class="ms-3">
@@ -24,7 +38,7 @@
       <span class="fs-3">TEAMTODO</span>
     </div>
     <div class="logout me-5">
-      <span class="fs-2"><i class="fas fa-user-circle"></i></span>
+      <span class="fs-2"><a href="#" onclick="openNav()"><i class="fas fa-user-circle"></i></a></span>
     </div>
   </nav>
 
@@ -35,7 +49,7 @@
         <nav class="navbar justify-content-between">
           <h3>TODO</h3>
           <div class="addArticle me-3">
-            <a href="#" class="btn btn-primary">Add Article</a>
+            <a href="/article/add" class="btn btn-primary">Add Article</a>
           </div>
         </nav>
         <% article.forEach((article, index) => {  %>
@@ -53,19 +67,21 @@
                   <i>3 hours ago</i>
                 </div>
               </div>
-            </div>
-            <div class="col-3">
+            </div> 
+            <% if(article.userid === profile.user_id || profile.user_role === "admin"){ %>
+            <div class="col-3"> 
               <div class="dropdown ">
                 <span class="dropdown-toggle text-end d-block fs-3" id="dropdownMenuButton" data-bs-toggle="dropdown">
                 </span>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="#">process</a>
-                  <a class="dropdown-item" href="#">done</a>
-                  <a class="dropdown-item" href="#">edit</a>
-                  <a class="dropdown-item" href="#">delete</a>
+                  <a class="dropdown-item" href="/article/process/<%=article.article_id%>">process</a>
+                  <a class="dropdown-item" href="/article/done/<%=article.article_id%>">done</a>
+                  <a class="dropdown-item" href="/article/edit/<%=article.article_id%>">edit</a>
+                  <a class="dropdown-item" href="/article/delete/<%=article.article_id%>">delete</a>
                 </div>
-              </div>
+              </div>  
             </div>
+            <% } %>
           </div>
           <hr>
           <div class="articleContent ms-4">
@@ -78,11 +94,10 @@
             <button class="btn btn-dark btn-sm me-2 cmtBtn" >Comment</button>
           </div>
           <!-- Comment for todo-->
-          <% comment.forEach((comment, index) => { %>
-          <% if(comment.article_id === article.article_id){ %>
+         
           <div class="articleCommentSection row  px-2 my-2 d-none">
             <hr>
-            <div class="row addarticle py-1">
+            <div class="row py-1">
               <div class="col-1">
                 <img src="images/unknown.png" alt="profile photo" width="25px" height="25px">
               </div>
@@ -96,8 +111,10 @@
                 </form>
               </div>
             </div>
+            <% comment.forEach((comment, index) => { %>
+            <% if(comment.article_id === article.article_id){ %>
             <div class="articleComment bg-light my-2">
-              <div class="row articleNav ">
+              <div class="row cmtNav ">
                 <div class="col-8">
                   <div class="row userComment">
                     <div class="col-2 mt-2">
@@ -110,6 +127,8 @@
                     </div>
                   </div>
                 </div>
+                
+                <% if(comment.user_id == profile.user_id || article.userid == profile.user_id){ %>
                 <div class="col-3">
                   <div class="dropdown ">
                     <span class="dropdown-toggle text-end d-block fs-3" id="dropdownMenuButton"
@@ -121,17 +140,19 @@
                     </div>
                   </div>
                 </div>
+                <% } %>
               </div>
+             
               <div class="articleContent ms-4  py-1">
                 <p>
                   <%= comment.comment_content %> <br>
                 </p>
               </div>
             </div>
-
+            <% }  }) %> <!--comment for todo end -->
+            
           </div>
-          <% }  }) %> <!--comment for todo end -->
-
+         
         </div>
       
         <% }  }) %> <!-- todo article end-->
@@ -158,18 +179,20 @@
                 </div>
               </div>
             </div>
-            <div class="col-3">
-              <div class="dropdown ">
-                <span class="dropdown-toggle text-end d-block fs-3" id="dropdownMenuButton" data-bs-toggle="dropdown">
-                </span>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="#">todo</a>
-                  <a class="dropdown-item" href="#">done</a>
-                  <a class="dropdown-item" href="#">edit</a>
-                  <a class="dropdown-item" href="#">delete</a>
-                </div>
+            <% if(article.userid === profile.user_id || profile.user_role === "admin"){ %>
+              <div class="col-3"> 
+                <div class="dropdown ">
+                  <span class="dropdown-toggle text-end d-block fs-3" id="dropdownMenuButton" data-bs-toggle="dropdown">
+                  </span>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="/article/process/<%=article.article_id%>">process</a>
+                  <a class="dropdown-item" href="/article/done/<%=article.article_id%>">done</a>
+                  <a class="dropdown-item" href="/article/edit/<%=article.article_id%>">edit</a>
+                  <a class="dropdown-item" href="/article/delete/<%=article.article_id%>">delete</a>
+                  </div>
+                </div>  
               </div>
-            </div>
+              <% } %>
           </div>
           <hr>
           <div class="articleContent ms-4">
@@ -182,8 +205,6 @@
             <button class="btn btn-dark btn-sm me-2 cmtBtn" >Comment</button>
           </div>
           <!-- Comment for process-->
-          <% comment.forEach((comment, index) => { %>
-          <% if(comment.article_id === article.article_id){ %>
           <div class="articleCommentSection row  px-2 my-2 d-none">
             <hr>
             <div class="row addarticle py-1">
@@ -200,47 +221,48 @@
                 </form>
               </div>
             </div>
-            <div class="articleComment bg-light my-2">
-              <div class="row articleNav ">
-                <div class="col-8">
-                  <div class="row userComment">
-                    <div class="col-2 mt-2">
-                      <img src="images/unknown.png" alt="unknown profile" width="20px" height="20px">
-                    </div>
-                    <div class="col-9">
-                      <span class="fw-bold"><%= comment.user_name %></span> &nbsp;
-                      <span ><%= comment.user_role %></span> <br>
-                      <i>3 hours ago</i>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-3">
-                  <div class="dropdown ">
-                    <span class="dropdown-toggle text-end d-block fs-3" id="dropdownMenuButton"
-                      data-bs-toggle="dropdown">
-                    </span>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item" href="#">edit</a>
-                      <a class="dropdown-item" href="#">delete</a>
+            <% comment.forEach((comment, index) => { %>
+              <% if(comment.article_id === article.article_id){ %>
+              <div class="articleComment bg-light my-2">
+                <div class="row cmtNav ">
+                  <div class="col-8">
+                    <div class="row userComment">
+                      <div class="col-2 mt-2">
+                        <img src="images/unknown.png" alt="unknown profile" width="20px" height="20px">
+                      </div>
+                      <div class="col-9">
+                        <span class="fw-bold"><%= comment.user_name %></span> &nbsp;
+                        <span ><%= comment.user_role %></span> <br>
+                        <i>3 hours ago</i>
+                      </div>
                     </div>
                   </div>
+                  <% if(comment.user_id == profile.user_id || article.userid == profile.user_id){ %>
+                  <div class="col-3">
+                    <div class="dropdown ">
+                      <span class="dropdown-toggle text-end d-block fs-3" id="dropdownMenuButton"
+                        data-bs-toggle="dropdown">
+                      </span>
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">edit</a>
+                        <a class="dropdown-item" href="#">delete</a>
+                      </div>
+                    </div>
+                  </div>
+                  <% } %>
+                </div>
+                <div class="articleContent ms-4  py-1">
+                  <p>
+                    <%= comment.comment_content %> <br>
+                  </p>
                 </div>
               </div>
-              <div class="articleContent ms-4  py-1">
-                <p>
-                  <%= comment.comment_content %> <br>
-                </p>
-              </div>
-            </div>
-
+              <% }  }) %> <!--comment for process end -->
           </div>
-          <% }  }) %> <!--comment for process end -->
-
         </div>
-      
         <% }  }) %> <!-- process article end-->
-
       </div>
+
       <!-- Done Part-->
       <div class="done col-4 ">
         <nav class="navbar justify-content-between">
@@ -262,18 +284,20 @@
                 </div>
               </div>
             </div>
-            <div class="col-3">
-              <div class="dropdown ">
-                <span class="dropdown-toggle text-end d-block fs-3" id="dropdownMenuButton" data-bs-toggle="dropdown">
-                </span>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="#">todo</a>
-                  <a class="dropdown-item" href="#">process</a>
-                  <a class="dropdown-item" href="#">edit</a>
-                  <a class="dropdown-item" href="#">delete</a>
-                </div>
+            <% if(article.userid === profile.user_id || profile.user_role === "admin"){ %>
+              <div class="col-3"> 
+                <div class="dropdown ">
+                  <span class="dropdown-toggle text-end d-block fs-3" id="dropdownMenuButton" data-bs-toggle="dropdown">
+                  </span>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="/article/process/<%=article.article_id%>">process</a>
+                  <a class="dropdown-item" href="/article/done/<%=article.article_id%>">done</a>
+                  <a class="dropdown-item" href="/article/edit/<%=article.article_id%>">edit</a>
+                  <a class="dropdown-item" href="/article/delete/<%=article.article_id%>">delete</a>
+                  </div>
+                </div>  
               </div>
-            </div>
+              <% } %>
           </div>
           <hr>
           <div class="articleContent ms-4">
@@ -286,8 +310,6 @@
             <button class="btn btn-dark btn-sm me-2 cmtBtn" >Comment</button>
           </div>
           <!-- Comment for done-->
-          <% comment.forEach((comment, index) => { %>
-          <% if(comment.article_id === article.article_id){ %>
           <div class="articleCommentSection row  px-2 my-2 d-none">
             <hr>
             <div class="row addarticle py-1">
@@ -304,8 +326,10 @@
                 </form>
               </div>
             </div>
+            <% comment.forEach((comment, index) => { %>
+            <% if(comment.article_id === article.article_id){ %>
             <div class="articleComment bg-light my-2">
-              <div class="row articleNav ">
+              <div class="row cmtNav ">
                 <div class="col-8">
                   <div class="row userComment">
                     <div class="col-2 mt-2">
@@ -318,6 +342,7 @@
                     </div>
                   </div>
                 </div>
+                <% if(comment.user_id == profile.user_id || article.userid == profile.user_id){ %>
                 <div class="col-3">
                   <div class="dropdown ">
                     <span class="dropdown-toggle text-end d-block fs-3" id="dropdownMenuButton"
@@ -329,6 +354,7 @@
                     </div>
                   </div>
                 </div>
+                <% } %>
               </div>
               <div class="articleContent ms-4  py-1">
                 <p>
@@ -336,14 +362,10 @@
                 </p>
               </div>
             </div>
-
-          </div>
-          <% }  }) %> <!--comment for done end -->
-
-        </div>
-      
-        <% }  }) %> <!-- process done end-->
-
+            <% }  }) %> <!--comment for done end -->
+          </div>         
+        </div>     
+        <% }  }) %> <!--  done end-->
       </div>
     </div>
   </section>
@@ -375,6 +397,19 @@
       })
       // *********** -- End -- *****************//
     })
+    function openNav(){
+    $("#mySidenav").css("width","30%");
+    $(".sidenav a ").css("font-size","20px");
+    $(".myDropDown").css("font-size","15px");
+     
+      
+    };
+    function closeNav(){
+    $('#mySidenav').css("width","0px");
+    $(".sidenav a ").css("font-size","0");
+    $(".myDropDown").css("font-size","0");
+    };
+  
   </script>
 </body>
 

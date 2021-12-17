@@ -26,7 +26,7 @@ connection.connect((error) => {
 
 // read article
 exports.readarticle = (callback) => {
-    connection.query('SELECT article.article_id, article.userid, article.article_content, article.article_role, article.article_created_date, user.user_name,user.user_role FROM article INNER JOIN user ON article.article_id=user.user_id', (err, result)=>{ 
+    connection.query('SELECT article.article_id, article.userid, article.article_content, article.article_role, article.article_created_date, user.user_name,user.user_role FROM article INNER JOIN user ON article.userid=user.user_id', (err, result)=>{ 
         if(err){
             console.log(err);
         }else{

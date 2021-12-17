@@ -1,7 +1,9 @@
 var userModel = require('../model/userModel')
 
 exports.login = (req, res, next) => {
-    if(req.method == 'POST'){
+    if(req.method === 'GET'){
+        res.render('login', {layout : false, message : ''});
+    }else{
         var params = req.body;
         userModel.login(params, (err, results) => {
             if(err){
@@ -14,12 +16,10 @@ exports.login = (req, res, next) => {
                     console.log(req.session);
                     res.redirect('/');
                 }else{
-                    res.render('/login',{ message : "Username or Password is incorrect"})
+                    res.render('login',{ layout: false , message : "Username or Password is incorrect"})
                 }  
             }
         })
-    }else{
-        res.render('login', {layout : false, message : ''});
     } 
 }
 exports.logout = (req, res) => {

@@ -15,7 +15,6 @@ var articleRouter = require('./routes/article');
 var commentRouter = require('./routes/comment');
 var app = express();
 
-
 var options = {
   host: process.env.DB_HOST ,
   port:  process.env.DB_PORT,
@@ -55,7 +54,7 @@ app.set('layout','layouts/default');
 // routes middleware
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/', articleRouter);
+app.use('/article', articleRouter);
 app.use ('/comments', commentRouter);
 
 
