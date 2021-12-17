@@ -57,16 +57,21 @@ exports.addarticle = (req, res, next) => {
    
 }
 
-// delete article
-// exports.deletearticle = (req, res) => {
+// update all article 
+// exports.edit_article = (req, res) => {
 //     const article_id = req.params.article_id;
 //     console.log("Method Name: ", req.method);
 //     if(req.method == "GET") {
 //         articleModel.articleDetail(article_id, (err, result) => {
-//             res.render('delete_article', { title: "Article Delete", detail: result});
+//             res.render('updateArticle', { title: "Article Edit", detail: result});
 //         });
 //     }else {
-//         articleModel.deletearticle(id, (err, result) => {
+//         var params = {
+//             'userid' : req.body.userid,
+//             'article_content' : req.body.article_content,
+//             'article_role' : req.body.article_role,
+//         }
+//         articleModel.edit(id,params, (err, result) => {
 //             res.redirect('/');
 //         });
 //     }
@@ -131,7 +136,7 @@ exports.edit = (req, res) => {
             if(err){
                 console.log(err);
             }else{
-                res.render('update_article', { layout : false, article : results[0] } )
+                res.render('edit', { layout : false, article : results[0] } )
             }
         })
     }else{

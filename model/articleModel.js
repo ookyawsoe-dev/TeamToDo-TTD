@@ -60,7 +60,7 @@ exports.addarticle = (id, params, callback) => {
    });
 };
 
-exports.articleDetail = (id, callback) => {
+exports.articleDetail = (id,article_id, callback) => {
     connection.query(
         `SELECT article_id, userid, article_content, article_role, article_created_date FROM article WHERE article_id = ? `,
         [article_id],
@@ -78,10 +78,10 @@ exports.articleDetail = (id, callback) => {
 }
 
 
-// delete article
-// exports.deletearticle = (article_id, callback) => {
+// edit all article
+// exports.edit_article = (params , callback) => {
 //     connection.query(
-//         `DELETE FROM article WHERE article_id = ? `, [article_id],
+//         `UPDATE article SET ? WHERE article_id = ? `,[params],
 //         (err, result) => {
 //             if(err) {
 //                 console.log(err);
