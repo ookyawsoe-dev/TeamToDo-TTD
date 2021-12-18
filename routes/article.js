@@ -10,7 +10,6 @@ router.get('/todo/:id', articleController.todo);
 router.get('/process/:id', articleController.process);
 router.get('/done/:id', articleController.done);
 router.get('/delete/:id', articleController.delete);
-// router.get('/editarticle/:id', articleController.edit_article);
 router.get('/edit/:id', articleController.edit);
 router.post('/edit/:id', articleController.edit);
 

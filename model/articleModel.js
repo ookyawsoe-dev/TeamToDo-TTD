@@ -78,20 +78,6 @@ exports.articleDetail = (id,article_id, callback) => {
 }
 
 
-// edit all article
-// exports.edit_article = (params , callback) => {
-//     connection.query(
-//         `UPDATE article SET ? WHERE article_id = ? `,[params],
-//         (err, result) => {
-//             if(err) {
-//                 console.log(err);
-//             }
-            
-//             callback(err, result);
-//         }
-//     );
-// }
-
 // to do
 exports.todo = (id, callback) => {
     connection.query(

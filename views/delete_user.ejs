@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/css/bootstrap.min.css' />
+  </head>
+  <body class="d-flex flex-column h-100">
+    
+    <%- include('./common/nav.ejs') %>
+
+    <!-- Begin page content -->
+    <main class="flex-shrink-0">
+      <div class="container">
+        <h1><%= title %></h1>
+        <table class="table">
+            <tr>
+                <td>User ID</td>
+                <td><%= detail.user_id%></td>
+            </tr>
+            <tr>
+                <td>Username</td>
+                <td><%= detail.user_name %></td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td><%= detail.email%></td>
+            </tr>
+            <tr>
+                <td>User Role</td>
+                <td><%= detail.user_role %></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <form id="frm" method="POST">
+                        <input type="submit" id="btnDelete" value="Delete" class="btn btn-primary">
+                        <a href="/" class="btn btn-info">Cancel</a>
+                    </form>
+                </td>
+            </tr>
+        </table>
+      </div>
+    </main>
+    
+  </body>
+</html>
