@@ -47,7 +47,6 @@ exports.addarticle = (req, res, next) => {
         articleModel.addarticle(id,params, (err, results) => {
             if(err) {
                 console.log(err);
-                console.log("Aung Si Thu + Myo Chay");
             }else{
                 console.log("Testing Redirect");
                 res.redirect('/');
@@ -56,26 +55,6 @@ exports.addarticle = (req, res, next) => {
     }
    
 }
-
-// update all article 
-// exports.edit_article = (req, res) => {
-//     const article_id = req.params.article_id;
-//     console.log("Method Name: ", req.method);
-//     if(req.method == "GET") {
-//         articleModel.articleDetail(article_id, (err, result) => {
-//             res.render('updateArticle', { title: "Article Edit", detail: result});
-//         });
-//     }else {
-//         var params = {
-//             'userid' : req.body.userid,
-//             'article_content' : req.body.article_content,
-//             'article_role' : req.body.article_role,
-//         }
-//         articleModel.edit(id,params, (err, result) => {
-//             res.redirect('/');
-//         });
-//     }
-// }
 
 
 // to do 

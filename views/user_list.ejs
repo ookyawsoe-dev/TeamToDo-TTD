@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User</title>
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+
+</head>
+
+<body>
+    <div class="addArticle me-3">
+        <a href="/register" class="btn btn-secondary">Add New User</a>
+      </div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <table class="table" id="datatable" display="100%">
+                    <thead>
+                        <tr>
+                            <th>User ID</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>User Role</th>
+                            <th>User Created Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%
+              data.forEach((user, index)=> {
+              %>
+                        <tr>
+                            <td><%= user.user_id %></td>
+                            <td><%= user.user_name %></td>
+                            <td><%= user.email %></td>
+                            <td><%= user.user_role %></td>
+                            <td><%= user.user_created_date %></td>
+                            <td>
+                                <a href="/user/edit/<%= user.user_id %>" class="btn btn-success btn-sm">&nbsp;&nbsp;&nbsp;Edit&nbsp;&nbsp;&nbsp;</a>
+                                <a href="/user/deleteuser/<%= user.user_id %>" class="btn btn-danger btn-sm">Delete</a>
+                            </td>
+                        </tr>
+                        <%
+              });
+              %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
