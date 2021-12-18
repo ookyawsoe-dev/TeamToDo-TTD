@@ -103,8 +103,8 @@
               </div>
               <div class="col-11 ">
                 <button class="addCommentBtn w-100 text-start addComment" data-id="<%=article.article_id%>">Comment here !</button>
-                <form action="" class="form d-none" data-id="<%=article.article_id%>">
-                  <textarea name="newcomment" id="newcomment" cols="30" rows="4" class="form-control"
+                <form action="/comments/add/<%=article.article_id%>" method="post" class="form d-none" data-id="<%=article.article_id%>">
+                  <textarea name="comment_content" id="newcomment" cols="30" rows="4" class="form-control"
                     placeholder="Comment here"></textarea> <br>
                   <input type="submit" value="Send" class="btn btn-success">
                   <button class="btn btn-primary commentCancel" data-id="<%=article.article_id%>">Cancel</button>
@@ -135,8 +135,8 @@
                       data-bs-toggle="dropdown">
                     </span>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item" href="#">edit</a>
-                      <a class="dropdown-item" href="#">delete</a>
+                      <a class="dropdown-item" href="/comments/edit/<%=comment.comment_id%>">edit</a>
+                      <a class="dropdown-item" href="/comments/delete/<%=comment.comment_id%>">delete</a>
                     </div>
                   </div>
                 </div>
@@ -213,8 +213,8 @@
               </div>
               <div class="col-11 ">
                 <button class="addCommentBtn w-100 text-start addComment" data-id="<%=article.article_id%>">Comment here !</button>
-                <form action="" class="form d-none" data-id="<%=article.article_id%>">
-                  <textarea name="newcomment" id="newcomment" cols="30" rows="4" class="form-control"
+                <form action="/comments/add/<%=article.article_id%>" method="post" class="form d-none" data-id="<%=article.article_id%>">
+                  <textarea name="comment_content" id="newcomment" cols="30" rows="4" class="form-control"
                     placeholder="Comment here"></textarea> <br>
                   <input type="submit" value="Send" class="btn btn-success">
                   <button class="btn btn-primary commentCancel" data-id="<%=article.article_id%>">Cancel</button>
@@ -244,8 +244,8 @@
                         data-bs-toggle="dropdown">
                       </span>
                       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">edit</a>
-                        <a class="dropdown-item" href="#">delete</a>
+                        <a class="dropdown-item" href="/comments/edit/<%=comment.comment_id%>">edit</a>
+                        <a class="dropdown-item" href="/comments/delete/<%=comment.comment_id%>">delete</a>
                       </div>
                     </div>
                   </div>
@@ -318,8 +318,8 @@
               </div>
               <div class="col-11 ">
                 <button class="addCommentBtn w-100 text-start addComment" data-id="<%=article.article_id%>">Comment here !</button>
-                <form action="" class="form d-none" data-id="<%=article.article_id%>">
-                  <textarea name="newcomment" id="newcomment" cols="30" rows="4" class="form-control"
+                <form action="/comments/add/<%=article.article_id%>" method="post" class="form d-none" data-id="<%=article.article_id%>">
+                  <textarea name="comment_content" id="newcomment" cols="30" rows="4" class="form-control"
                     placeholder="Comment here"></textarea> <br>
                   <input type="submit" value="Send" class="btn btn-success">
                   <button class="btn btn-primary commentCancel" data-id="<%=article.article_id%>">Cancel</button>
@@ -349,8 +349,8 @@
                       data-bs-toggle="dropdown">
                     </span>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item" href="#">edit</a>
-                      <a class="dropdown-item" href="#">delete</a>
+                      <a class="dropdown-item" href="/comments/edit/<%=comment.comment_id%>">edit</a>
+                      <a class="dropdown-item" href="/comments/delete/<%=comment.comment_id%>">delete</a>
                     </div>
                   </div>
                 </div>
