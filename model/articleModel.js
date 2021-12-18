@@ -1,5 +1,6 @@
 const mysql = require('mysql2');
 const dotenv = require('dotenv');
+const { done } = require('../controller/articleController');
 dotenv.config();
 
 
@@ -35,28 +36,123 @@ exports.readarticle = (callback) => {
     });
 };
 
+// show article
+exports.showarticle = (callback) => {
+    connection.query('SELECT * from article', (err, result)=>{ 
+        if(err){
+            console.log(err);
+        }else{
+            callback(err, result);
+        }
+    });
+};
+
 // add article
-exports.addarticle = (params, callback) => {
-   connection.query(`INSERT INTO article(article_id, userid, article_content,article_role, article_created_date) VALUES (null, ${ params.userid }, ${ params.article_content }, "todo", CURRENT_TIMESTAMP())`, (err, results) => {
+exports.addarticle = (id, params, callback) => {
+   console.log("User ID ", id);
+   connection.query(`INSERT INTO article(userid, article_content,article_role, article_created_date) VALUES ( "${id }", "${ params.article_content }", "todo", CURRENT_TIMESTAMP())`, (err, results) => {
     if(err){
         console.log(err);
     }else{
         console.log(results);
+        callback(err,results);
     }
    });
 };
 
-// delete article
-exports.deletearticle = (article_id, callback) => {
+exports.articleDetail = (id,article_id, callback) => {
     connection.query(
-        `DELETE FROM article WHERE article_id = ? `, [article_id],
+        `SELECT article_id, userid, article_content, article_role, article_created_date FROM article WHERE article_id = ? `,
+        [article_id],
         (err, result) => {
             if(err) {
                 console.log(err);
             }
-            
-            callback(err, result);
+            var row = null;
+            if(result.length > 0) {
+                row = result[0];
+            }
+            callback(err, row);
         }
     );
 }
 
+
+// to do
+exports.todo = (id, callback) => {
+    connection.query(
+        `UPDATE article SET article_role="todo" WHERE article_id = ?`, [id],
+        (err, results) => {
+            if(err){
+                console.log(err);
+            }else{
+                callback(err, results);
+            }
+        }
+    )
+}
+
+// process
+exports.process = (id, callback) => {
+    connection.query(
+        `UPDATE article SET article_role="process" WHERE article_id = ?`, [id],
+        (err, results) => {
+            if(err){
+                console.log(err);
+            }else{
+                callback(err, results);
+            }
+        }
+    )
+}
+
+// done
+exports.done = (id, callback) => {
+    connection.query(
+        `UPDATE article SET article_role="done" WHERE article_id = ?`, [id],
+        (err, results) => {
+            if(err){
+                console.log(err);
+            }else{
+                callback(err, results);
+            }
+        }
+    )
+}
+
+// delete
+exports.delete = (id, callback) => {
+    connection.query(
+        `DELETE from article WHERE article_id = ?`, [id],
+        (err, results) => {
+            if(err){
+                console.log(err);
+            }else{
+                callback(err, results);
+            }
+        }
+    )
+}
+// edit form 
+exports.editForm =(id, callback)=>{
+    connection.query(`SELECT * FROM article WHERE article_id =?`,[id], (err, results) =>{
+        if(err){
+            console.log(err);
+        }else{
+            callback(err, results);
+        }
+    })
+}
+// edit
+exports.edit = (id,article_content, callback) => {
+    connection.query(
+        `UPDATE article SET article_content = ? WHERE article_id = ?`,[article_content,id],
+        (err, results) => {
+            if(err){
+                console.log(err);
+            }else{
+                callback(err, results);
+            }
+        }
+    )
+}

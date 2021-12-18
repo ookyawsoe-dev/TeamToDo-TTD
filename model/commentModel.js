@@ -21,7 +21,7 @@ const connection = mysql.createConnection({
 //     }
 // });
 
-// read article
+// read comment
 exports.readComment = (callback) => {
     connection.query('SELECT comment.comment_id,comment.user_id,comment.article_id,comment.comment_content, user.user_name,user.user_role FROM comment INNER JOIN user ON comment.user_id = user.user_id', (err, result)=>{ 
         if(err){
@@ -31,3 +31,25 @@ exports.readComment = (callback) => {
         }
     });
 };
+
+//add new comment
+exports.addComment = ( {articleId, userId, content }, callback) => {
+    connection.query(`INSERT INTO comment(user_id,article_id,comment_content,comment_created_date) VALUES(?,?,?,CURRENT_TIMESTAMP())`,[userId,articleId,content], (err, results) =>{
+        if(err){
+            console.log(err);
+        }else{
+            callback(err, results);
+        }
+    })
+}
+
+//delete comment 
+exports.deleteComment = (commentId, callback) => {
+    connection.query(`DELETE FROM comment WHERE comment_id = ?`, [commentId], (err, results) => {
+        if(err){
+            console.log(err);
+        }else{
+            callback(err, results);
+        }
+    })
+}

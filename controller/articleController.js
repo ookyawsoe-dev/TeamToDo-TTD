@@ -2,6 +2,7 @@
 const articleModel = require('../model/articleModel');
 const commentModel = require('../model/commentModel');
 const auth = require('../Middleware/checkAuth');
+const { param } = require('../routes');
 
 
 
@@ -25,15 +26,15 @@ exports.readarticle = (req, res, next) => {
     })
 }
 
-// exports.readarticle = (req, res, next) => {
-//     articleModel.readarticle((err, results) => {
-//         if(err){
-//             console.log(err);
-//         }else{
-//             res.render('readarticles', {data : results});
-//         }
-//     });
-// };
+exports.showarticle = (req, res, next) => {
+    articleModel.showarticle((err, results) => {
+        if(err){
+            console.log(err);
+        }else{
+            res.render('list_article', {data : results});
+        }
+    });
+};
 
 
 // add article
@@ -42,29 +43,88 @@ exports.addarticle = (req, res, next) => {
     if(req.method == "GET"){
         res.render('add_article',{layout : false});
     }else{
-        articleModel.addarticle(params, (err, results) => {
-            if(err){
+        var id = req.session.user.user_id;
+        articleModel.addarticle(id,params, (err, results) => {
+            if(err) {
                 console.log(err);
             }else{
-                res.redirect('/', { data : results });
+                console.log("Testing Redirect");
+                res.redirect('/');
             }
         });
     }
    
 }
 
-// delete article
-exports.deletearticle = (req, res) => {
-    const article_id = req.params.article_id;
-    console.log("Method Name: ", req.method);
+
+// to do 
+exports.todo = (req, res) => {
+    const id = req.params.id;
+    articleModel.todo(id, (err, results) => {
+        if(err){
+            console.log(err);
+        }else{
+            res.redirect('/')
+        }
+    });
+}
+
+// process
+exports.process = (req, res) => {
+    const id = req.params.id;
+    articleModel.process(id, (err, results) => {
+        if(err){
+            console.log(err);
+        }else{
+            res.redirect('/')
+        }
+    });
+}
+
+
+// done
+exports.done = (req, res) => {
+    const id = req.params.id;
+    articleModel.done(id, (err, results) => {
+        if(err){
+            console.log(err);
+        }else{
+            res.redirect('/')
+        }
+    });
+}
+
+// delete
+exports.delete = (req, res) => {
+    const id = req.params.id;
+    articleModel.delete(id, (err, results) => {
+        if(err){
+            console.log(err);
+        }else{
+            res.redirect('/');
+        }
+    });
+}
+
+// edit
+exports.edit = (req, res) => {
+    const id = req.params.id;
+    var article_content = req.body.article_content;
     if(req.method == "GET") {
-        articleModel.readarticle(article_id, (err, result) => {
-            res.render('delete_article', { title: "Article Delete", detail: result});
+        articleModel.editForm(id, (err, results) => {
+            if(err){
+                console.log(err);
+            }else{
+                res.render('edit', { layout : false, article : results[0] } )
+            }
         })
-    }else {
-        articleModel.deletearticle(id, (err, result) => {
-            res.redirect('/article');
+    }else{
+        articleModel.edit(id,article_content, (err, results) => {
+            if(err){
+                console.log(err);
+            }else{
+                res.redirect('/');
+            }
         });
     }
 }
-
