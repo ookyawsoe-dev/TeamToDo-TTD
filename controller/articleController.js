@@ -47,7 +47,6 @@ exports.addarticle = (req, res, next) => {
         articleModel.addarticle(id,params, (err, results) => {
             if(err) {
                 console.log(err);
-                console.log("Aung Si Thu + Myo Chay");
             }else{
                 console.log("Testing Redirect");
                 res.redirect('/');
