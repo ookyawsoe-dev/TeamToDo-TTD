@@ -45,7 +45,7 @@ exports.showarticle = (callback) => {
             callback(err, result);
         }
     });
-};
+};  
 
 // add article
 exports.addarticle = (id, params, callback) => {

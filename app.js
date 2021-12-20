@@ -32,9 +32,9 @@ var sessionStore = new MySQLStore({}, connection);
 app.use(session({
   name: 'tdd_id',
   secret: 'tdd2021',
-  resave: false,
+  resave: true,
   store: sessionStore,
-  saveUninitialized: true,
+  saveUninitialized: false,
 }));
 
 // view engine setup

@@ -62,13 +62,45 @@ exports.logout = (req, res) => {
 }
 
 // delete user
-exports.deleteuser = (req, res) => {
-    const id = req.params.user_id;
-    userModel.deleteuser(id, (err, results) => {
+exports.delete = (req, res) => {
+    const id = req.params.id;
+    userModel.delete(id, (err, results) => {
         if(err){
             console.log(err);
         }else{
             res.redirect('/user');
         }
     });
+}
+
+
+// edit user data
+exports.edit = (req, res) => {
+    const id = req.params.id;
+    if(req.method == "GET") {
+        userModel.editForm(id, (err, results) => {
+            if(err){
+                console.log(err);
+            }else{
+                res.render('edit _user', { layout : false, user : results[0] } )
+            }
+        })
+    }else{
+        var params = {
+            user_name : req.body.user_name,
+            email : req.body.email,
+            password : req.body.password,
+            user_role : req.body.user_role
+        }
+        if(params.password){
+            params.password = req.body.password
+        }
+        userModel.edit(id,params, (err, results) => {
+            if(err){
+                console.log(err);
+            }else{
+                res.redirect('/user');
+            }
+        });
+    }
 }
