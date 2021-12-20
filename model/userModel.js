@@ -1,5 +1,6 @@
 const mysql = require('mysql2');
 const dotenv = require('dotenv');
+const req = require('express/lib/request');
 dotenv.config();
 
 
@@ -50,9 +51,34 @@ exports.login = ( params , callback) => {
 }
 
 // delete user
-exports.deleteuser = (id, callback) => {
+exports.delete = (id, callback) => {
     connection.query(
         `DELETE from user WHERE user_id = ?`, [id],
+        (err, results) => {
+            if(err){
+                console.log(err);
+            }else{
+                callback(err, results);
+            }
+        }
+    )
+}
+
+// edit form 
+exports.editForm =(id, callback)=>{
+    connection.query(`SELECT * FROM user WHERE user_id =?`,[id], (err, results) =>{
+        if(err){
+            console.log(err);
+        }else{
+            callback(err, results);
+        }   
+    })
+}
+
+// edit user data
+exports.edit = (params, id, callback) => {
+    connection.query(
+        `UPDATE user SET ? WHERE user_id = ?`,[id, params],
         (err, results) => {
             if(err){
                 console.log(err);
