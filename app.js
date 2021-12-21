@@ -5,9 +5,9 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var dotenv = require('dotenv');
 dotenv.config();
+var mysql2 = require('mysql2/promise');
 var session = require('express-session');
 var MySQLStore = require('express-mysql-session')(session);
-var mysql2 = require('mysql2/promise');
 var expressLayouts = require('express-ejs-layouts');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -32,9 +32,9 @@ var sessionStore = new MySQLStore({}, connection);
 app.use(session({
   name: 'tdd_id',
   secret: 'tdd2021',
-  resave: false,
+  resave: true,
   store: sessionStore,
-  saveUninitialized: true,
+  saveUninitialized: false,
 }));
 
 // view engine setup
@@ -47,9 +47,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-//layout setup
-app.use(expressLayouts);
-app.set('layout','layouts/default');
+// //layout setup
+// app.use(expressLayouts);
+// app.set('layout','layouts/default');
 
 // routes middleware
 app.use('/', indexRouter);
