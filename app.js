@@ -13,6 +13,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var articleRouter = require('./routes/article');
 var commentRouter = require('./routes/comment');
+var adminRouter = require('./routes/admin');
 var app = express();
 
 var options = {
@@ -47,15 +48,16 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// //layout setup
-// app.use(expressLayouts);
-// app.set('layout','layouts/default');
+//layout setup
+app.use(expressLayouts);
+app.set('layout','layouts/default');
 
 // routes middleware
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/', usersRouter);
 app.use('/article', articleRouter);
 app.use ('/comments', commentRouter);
+app.use('/admin', adminRouter);
 
 
 

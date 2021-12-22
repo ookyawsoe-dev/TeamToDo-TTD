@@ -24,3 +24,15 @@ exports.deleteComment = (req, res, next) => {
         }
     })
 }
+
+exports.editComment = (req, res, next) => {
+    const commentId = req.params.id;
+    const content = req.body.comment_content;
+    commentModel.editComment(commentId, content, (err, results) => {
+        if(err){
+            console.log(err);
+        }else{
+            res.json({ code: 1, content: content});
+        }
+    })
+}

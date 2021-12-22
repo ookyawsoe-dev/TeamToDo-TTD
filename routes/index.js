@@ -9,10 +9,6 @@ var auth = require('../Middleware/checkAuth')
 router.get('/login', userController.login);
 router.post('/login', userController.login);
 router.get('/logout', userController.logout);
-
 router.get('/', auth, articleController.readarticle );
 
-
-
-                                    
 module.exports = router;

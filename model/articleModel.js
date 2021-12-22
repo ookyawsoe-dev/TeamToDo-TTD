@@ -45,7 +45,7 @@ exports.showarticle = (callback) => {
             callback(err, result);
         }
     });
-};
+};  
 
 // add article
 exports.addarticle = (id, params, callback) => {
@@ -60,7 +60,7 @@ exports.addarticle = (id, params, callback) => {
    });
 };
 
-exports.articleDetail = (id, callback) => {
+exports.articleDetail = (id,article_id, callback) => {
     connection.query(
         `SELECT article_id, userid, article_content, article_role, article_created_date FROM article WHERE article_id = ? `,
         [article_id],
@@ -77,20 +77,6 @@ exports.articleDetail = (id, callback) => {
     );
 }
 
-
-// delete article
-// exports.deletearticle = (article_id, callback) => {
-//     connection.query(
-//         `DELETE FROM article WHERE article_id = ? `, [article_id],
-//         (err, result) => {
-//             if(err) {
-//                 console.log(err);
-//             }
-            
-//             callback(err, result);
-//         }
-//     );
-// }
 
 // to do
 exports.todo = (id, callback) => {
@@ -158,12 +144,9 @@ exports.editForm =(id, callback)=>{
     })
 }
 // edit
-exports.edit = (id, updateData, callback) => {
-    if(updateData.article_content){
-        article_content = updateData.article_content;
-    }
+exports.edit = (id,article_content, callback) => {
     connection.query(
-        `UPDATE article SET ? WHERE article_id = ?`,[article_content, id],
+        `UPDATE article SET article_content = ? WHERE article_id = ?`,[article_content,id],
         (err, results) => {
             if(err){
                 console.log(err);
