@@ -59,7 +59,11 @@
             <div class="col-8">
               <div class="row userArticle">
                 <div class="col-2 mt-2">
-                  <img src="images/unknown.png" alt="unknown profile" width="30px" height="30px">
+                  <% if(article.profile != "null"){%>
+                      <img src="<%= article.profile %>" alt="Profile" width="30px" height="30px">
+                  <% } else {  %>
+                      <img src="images/unknown.png" alt="unknown profile" width="30px" height="30px">
+                  <% } %>
                 </div>
                 <div class="col-9">
                   <span class="fw-bold fs-5"><%= article.user_name %></span> <br>
@@ -99,7 +103,11 @@
             <hr>
             <div class="row py-1">
               <div class="col-1">
-                <img src="images/unknown.png" alt="profile photo" width="25px" height="25px">
+                <% if(profile.profile != "null"){%>
+                  <img src="<%= profile.profile %>" alt="Profile" width="30px" height="30px">
+              <% } else {  %>
+                  <img src="images/unknown.png" alt="unknown profile" width="30px" height="30px">
+              <% } %>
               </div>
               <div class="col-11 ">
                 <button class="addCommentBtn w-100 text-start addComment" data-id="<%=article.article_id%>">Comment here !</button>
@@ -118,7 +126,11 @@
                 <div class="col-8">
                   <div class="row userComment">
                     <div class="col-2 mt-2">
-                      <img src="images/unknown.png" alt="unknown profile" width="20px" height="20px">
+                      <% if(comment.profile != "null"){%>
+                        <img src="<%= comment.profile %>" alt="Profile" width="30px" height="30px">
+                    <% } else {  %>
+                        <img src="images/unknown.png" alt="unknown profile" width="30px" height="30px">
+                    <% } %>
                     </div>
                     <div class="col-9">
                       <span class="fw-bold"><%= comment.user_name %></span> &nbsp;
@@ -175,7 +187,11 @@
             <div class="col-8">
               <div class="row userArticle">
                 <div class="col-2 mt-2">
-                  <img src="images/unknown.png" alt="unknown profile" width="30px" height="30px">
+                  <% if(article.profile != "null"){%>
+                    <img src="<%= article.profile %>" alt="Profile" width="30px" height="30px">
+                <% } else {  %>
+                    <img src="images/unknown.png" alt="unknown profile" width="30px" height="30px">
+                <% } %>
                 </div>
                 <div class="col-9">
                   <span class="fw-bold fs-5"><%= article.user_name %></span> <br>
@@ -215,7 +231,11 @@
             <hr>
             <div class="row py-1">
               <div class="col-1">
-                <img src="images/unknown.png" alt="profile photo" width="25px" height="25px">
+                <% if(profile.profile != "null"){%>
+                  <img src="<%= profile.profile %>" alt="Profile" width="30px" height="30px">
+              <% } else {  %>
+                  <img src="images/unknown.png" alt="unknown profile" width="30px" height="30px">
+              <% } %>
               </div>
               <div class="col-11 ">
                 <button class="addCommentBtn w-100 text-start addComment" data-id="<%=article.article_id%>">Comment here !</button>
@@ -234,7 +254,11 @@
                 <div class="col-8">
                   <div class="row userComment">
                     <div class="col-2 mt-2">
-                      <img src="images/unknown.png" alt="unknown profile" width="20px" height="20px">
+                      <% if(comment.profile != "null"){%>
+                        <img src="<%= comment.profile %>" alt="Profile" width="30px" height="30px">
+                    <% } else {  %>
+                        <img src="images/unknown.png" alt="unknown profile" width="30px" height="30px">
+                    <% } %>
                     </div>
                     <div class="col-9">
                       <span class="fw-bold"><%= comment.user_name %></span> &nbsp;
@@ -292,7 +316,11 @@
             <div class="col-8">
               <div class="row userArticle">
                 <div class="col-2 mt-2">
-                  <img src="images/unknown.png" alt="unknown profile" width="30px" height="30px">
+                  <% if(article.profile != "null"){%>
+                    <img src="<%= article.profile %>" alt="Profile" width="30px" height="30px">
+                <% } else {  %>
+                    <img src="images/unknown.png" alt="unknown profile" width="30px" height="30px">
+                <% } %>
                 </div>
                 <div class="col-9">
                   <span class="fw-bold fs-5"><%= article.user_name %></span> <br>
@@ -332,7 +360,11 @@
             <hr>
             <div class="row py-1">
               <div class="col-1">
-                <img src="images/unknown.png" alt="profile photo" width="25px" height="25px">
+                <% if(profile.profile != "null"){%>
+                  <img src="<%= profile.profile %>" alt="Profile" width="30px" height="30px">
+              <% } else {  %>
+                  <img src="images/unknown.png" alt="unknown profile" width="30px" height="30px">
+              <% } %>
               </div>
               <div class="col-11 ">
                 <button class="addCommentBtn w-100 text-start addComment" data-id="<%=article.article_id%>">Comment here !</button>
@@ -351,7 +383,11 @@
                 <div class="col-8">
                   <div class="row userComment">
                     <div class="col-2 mt-2">
-                      <img src="images/unknown.png" alt="unknown profile" width="20px" height="20px">
+                      <% if(comment.profile != "null"){%>
+                        <img src="<%= comment.profile %>" alt="Profile" width="30px" height="30px">
+                    <% } else {  %>
+                        <img src="images/unknown.png" alt="unknown profile" width="30px" height="30px">
+                    <% } %>
                     </div>
                     <div class="col-9">
                       <span class="fw-bold"><%= comment.user_name %></span> &nbsp;
