@@ -59,7 +59,11 @@
             <div class="col-8">
               <div class="row userArticle">
                 <div class="col-2 mt-2">
-                  <img src="images/unknown.png" alt="unknown profile" width="30px" height="30px">
+                  <% if(article.profile != "null"){%>
+                      <img src="<%= article.profile %>" alt="Profile" width="30px" height="30px">
+                  <% } else {  %>
+                      <img src="images/unknown.png" alt="unknown profile" width="30px" height="30px">
+                  <% } %>
                 </div>
                 <div class="col-9">
                   <span class="fw-bold fs-5"><%= article.user_name %></span> <br>
@@ -99,7 +103,11 @@
             <hr>
             <div class="row py-1">
               <div class="col-1">
-                <img src="images/unknown.png" alt="profile photo" width="25px" height="25px">
+                <% if(profile.profile != "null"){%>
+                  <img src="<%= profile.profile %>" alt="Profile" width="30px" height="30px">
+              <% } else {  %>
+                  <img src="images/unknown.png" alt="unknown profile" width="30px" height="30px">
+              <% } %>
               </div>
               <div class="col-11 ">
                 <button class="addCommentBtn w-100 text-start addComment" data-id="<%=article.article_id%>">Comment here !</button>
@@ -118,7 +126,11 @@
                 <div class="col-8">
                   <div class="row userComment">
                     <div class="col-2 mt-2">
-                      <img src="images/unknown.png" alt="unknown profile" width="20px" height="20px">
+                      <% if(comment.profile != "null"){%>
+                        <img src="<%= comment.profile %>" alt="Profile" width="30px" height="30px">
+                    <% } else {  %>
+                        <img src="images/unknown.png" alt="unknown profile" width="30px" height="30px">
+                    <% } %>
                     </div>
                     <div class="col-9">
                       <span class="fw-bold"><%= comment.user_name %></span> &nbsp;
@@ -135,7 +147,7 @@
                       data-bs-toggle="dropdown">
                     </span>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item" href="/comments/edit/<%=comment.comment_id%>">edit</a>
+                      <a class="dropdown-item cmtEditBtn" data-id="<%= comment.comment_id %>" >edit</a>
                       <a class="dropdown-item" href="/comments/delete/<%=comment.comment_id%>">delete</a>
                     </div>
                   </div>
@@ -144,9 +156,14 @@
               </div>
              
               <div class="articleContent ms-4  py-1">
-                <p>
+                <p class="articlePara" data-id="<%= comment.comment_id%>">
                   <%= comment.comment_content %> <br>
                 </p>
+                <form class="d-none cmtEditForm" data-id="<%= comment.comment_id %>">
+                  <textarea name="comment_content" id="newcomment" cols="25" rows="3" class="form-control commentedit" placeholder="Comment here"  data-id="<%= comment.comment_id%>"></textarea> <br>
+                  <input type="submit" value="Edit" class="btn btn-success">
+                  <button class="btn btn-primary cmtEditCancel" data-id="<%=comment.comment%>">Cancel</button>
+                 </form>
               </div>
             </div>
             <% }  }) %> <!--comment for todo end -->
@@ -159,7 +176,7 @@
 
       </div>
       <!-- Process Part-->
-      <div class="process col-4 ">
+      <div class="todo col-4 ">
         <nav class="navbar justify-content-between">
           <h3>PROCESS</h3>
         </nav>
@@ -170,29 +187,33 @@
             <div class="col-8">
               <div class="row userArticle">
                 <div class="col-2 mt-2">
-                  <img src="images/unknown.png" alt="unknown profile" width="30px" height="30px">
-                  </div>
+                  <% if(article.profile != "null"){%>
+                    <img src="<%= article.profile %>" alt="Profile" width="30px" height="30px">
+                <% } else {  %>
+                    <img src="images/unknown.png" alt="unknown profile" width="30px" height="30px">
+                <% } %>
+                </div>
                 <div class="col-9">
                   <span class="fw-bold fs-5"><%= article.user_name %></span> <br>
                   <span><%= article.user_role %></span> &nbsp;
                   <i>3 hours ago</i>
                 </div>
               </div>
-            </div>
+            </div> 
             <% if(article.userid === profile.user_id || profile.user_role === "admin"){ %>
-              <div class="col-3"> 
-                <div class="dropdown ">
-                  <span class="dropdown-toggle text-end d-block fs-3" id="dropdownMenuButton" data-bs-toggle="dropdown">
-                  </span>
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="/article/todo/<%=article.article_id%>">todo</a>
+            <div class="col-3"> 
+              <div class="dropdown ">
+                <span class="dropdown-toggle text-end d-block fs-3" id="dropdownMenuButton" data-bs-toggle="dropdown">
+                </span>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="/article/process/<%=article.article_id%>">process</a>
                   <a class="dropdown-item" href="/article/done/<%=article.article_id%>">done</a>
                   <a class="dropdown-item" href="/article/edit/<%=article.article_id%>">edit</a>
                   <a class="dropdown-item" href="/article/delete/<%=article.article_id%>">delete</a>
-                  </div>
-                </div>  
-              </div>
-              <% } %>
+                </div>
+              </div>  
+            </div>
+            <% } %>
           </div>
           <hr>
           <div class="articleContent ms-4">
@@ -205,116 +226,16 @@
             <button class="btn btn-dark btn-sm me-2 cmtBtn" >Comment</button>
           </div>
           <!-- Comment for process-->
+         
           <div class="articleCommentSection row  px-2 my-2 d-none">
             <hr>
-            <div class="row addarticle py-1">
+            <div class="row py-1">
               <div class="col-1">
-                <img src="images/unknown.png" alt="profile photo" width="25px" height="25px">
-              </div>
-              <div class="col-11 ">
-                <button class="addCommentBtn w-100 text-start addComment" data-id="<%=article.article_id%>">Comment here !</button>
-                <form action="/comments/add/<%=article.article_id%>" method="post" class="form d-none" data-id="<%=article.article_id%>">
-                  <textarea name="comment_content" id="newcomment" cols="30" rows="4" class="form-control"
-                    placeholder="Comment here"></textarea> <br>
-                  <input type="submit" value="Send" class="btn btn-success">
-                  <button class="btn btn-primary commentCancel" data-id="<%=article.article_id%>">Cancel</button>
-                </form>
-              </div>
-            </div>
-            <% comment.forEach((comment, index) => { %>
-              <% if(comment.article_id === article.article_id){ %>
-              <div class="articleComment bg-light my-2">
-                <div class="row cmtNav ">
-                  <div class="col-8">
-                    <div class="row userComment">
-                      <div class="col-2 mt-2">
-                        <img src="images/unknown.png" alt="unknown profile" width="20px" height="20px">
-                      </div>
-                      <div class="col-9">
-                        <span class="fw-bold"><%= comment.user_name %></span> &nbsp;
-                        <span ><%= comment.user_role %></span> <br>
-                        <i>3 hours ago</i>
-                      </div>
-                    </div>
-                  </div>
-                  <% if(comment.user_id == profile.user_id || article.userid == profile.user_id){ %>
-                  <div class="col-3">
-                    <div class="dropdown ">
-                      <span class="dropdown-toggle text-end d-block fs-3" id="dropdownMenuButton"
-                        data-bs-toggle="dropdown">
-                      </span>
-                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="/comments/edit/<%=comment.comment_id%>">edit</a>
-                        <a class="dropdown-item" href="/comments/delete/<%=comment.comment_id%>">delete</a>
-                      </div>
-                    </div>
-                  </div>
-                  <% } %>
-                </div>
-                <div class="articleContent ms-4  py-1">
-                  <p>
-                    <%= comment.comment_content %> <br>
-                  </p>
-                </div>
-              </div>
-              <% }  }) %> <!--comment for process end -->
-          </div>
-        </div>
-        <% }  }) %> <!-- process article end-->
-      </div>
-
-      <!-- Done Part-->
-      <div class="done col-4 ">
-        <nav class="navbar justify-content-between">
-          <h3>DONE</h3>
-        </nav>
-        <% article.forEach((article, index) => {  %>
-        <% if(article.article_role=="done"){ %>
-        <div class="article my-2 ">
-          <div class="row articleNav">
-            <div class="col-8">
-              <div class="row userArticle">
-                <div class="col-2 mt-2">
+                <% if(profile.profile != "null"){%>
+                  <img src="<%= profile.profile %>" alt="Profile" width="30px" height="30px">
+              <% } else {  %>
                   <img src="images/unknown.png" alt="unknown profile" width="30px" height="30px">
-                </div>
-                <div class="col-9">
-                  <span class="fw-bold fs-5"><%= article.user_name %></span> <br>
-                  <span><%= article.user_role %></span> &nbsp;
-                  <i>3 hours ago</i>
-                </div>
-              </div>
-            </div>
-            <% if(article.userid === profile.user_id || profile.user_role === "admin"){ %>
-              <div class="col-3"> 
-                <div class="dropdown ">
-                  <span class="dropdown-toggle text-end d-block fs-3" id="dropdownMenuButton" data-bs-toggle="dropdown">
-                  </span>
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="/article/todo/<%=article.article_id%>">todo</a>
-                  <a class="dropdown-item" href="/article/process/<%=article.article_id%>">process</a>
-                  <a class="dropdown-item" href="/article/edit/<%=article.article_id%>">edit</a>
-                  <a class="dropdown-item" href="/article/delete/<%=article.article_id%>">delete</a>
-                  </div>
-                </div>  
-              </div>
               <% } %>
-          </div>
-          <hr>
-          <div class="articleContent ms-4">
-            <p>
-              <%= article.article_content %>
-            </p>
-
-          </div>
-          <div class="text-end commentBtn my-2"  data-id="comment_<%=article.article_id%>">
-            <button class="btn btn-dark btn-sm me-2 cmtBtn" >Comment</button>
-          </div>
-          <!-- Comment for done-->
-          <div class="articleCommentSection row  px-2 my-2 d-none">
-            <hr>
-            <div class="row addarticle py-1">
-              <div class="col-1">
-                <img src="images/unknown.png" alt="profile photo" width="25px" height="25px">
               </div>
               <div class="col-11 ">
                 <button class="addCommentBtn w-100 text-start addComment" data-id="<%=article.article_id%>">Comment here !</button>
@@ -333,7 +254,11 @@
                 <div class="col-8">
                   <div class="row userComment">
                     <div class="col-2 mt-2">
-                      <img src="images/unknown.png" alt="unknown profile" width="20px" height="20px">
+                      <% if(comment.profile != "null"){%>
+                        <img src="<%= comment.profile %>" alt="Profile" width="30px" height="30px">
+                    <% } else {  %>
+                        <img src="images/unknown.png" alt="unknown profile" width="30px" height="30px">
+                    <% } %>
                     </div>
                     <div class="col-9">
                       <span class="fw-bold"><%= comment.user_name %></span> &nbsp;
@@ -342,6 +267,7 @@
                     </div>
                   </div>
                 </div>
+                
                 <% if(comment.user_id == profile.user_id || article.userid == profile.user_id){ %>
                 <div class="col-3">
                   <div class="dropdown ">
@@ -349,23 +275,162 @@
                       data-bs-toggle="dropdown">
                     </span>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item" href="/comments/edit/<%=comment.comment_id%>">edit</a>
+                      <a class="dropdown-item cmtEditBtn" data-id="<%= comment.comment_id %>" >edit</a>
                       <a class="dropdown-item" href="/comments/delete/<%=comment.comment_id%>">delete</a>
                     </div>
                   </div>
                 </div>
                 <% } %>
               </div>
+             
               <div class="articleContent ms-4  py-1">
-                <p>
+                <p class="articlePara" data-id="<%= comment.comment_id%>">
                   <%= comment.comment_content %> <br>
                 </p>
+                <form class="d-none cmtEditForm" data-id="<%= comment.comment_id %>">
+                  <textarea name="comment_content" id="newcomment" cols="35" rows="3" class="form-control commentedit" placeholder="Comment here"  data-id="<%= comment.comment_id%>"></textarea> <br>
+                  <input type="submit" value="Edit" class="btn btn-success">
+                  <button class="btn btn-primary cmtEditCancel" data-id="<%=comment.comment%>">Cancel</button>
+                 </form>
+              </div>
+            </div>
+            <% }  }) %> <!--comment for process end -->
+            
+          </div>
+         
+        </div>
+      
+        <% }  }) %> <!-- process article end-->
+
+      </div>
+
+      <!-- Done Part-->
+      <div class="todo col-4 ">
+        <nav class="navbar justify-content-between">
+          <h3>DONE</h3>
+        </nav>
+        <% article.forEach((article, index) => {  %>
+        <% if(article.article_role=="done"){ %>
+        <div class="article my-2 ">
+          <div class="row articleNav">
+            <div class="col-8">
+              <div class="row userArticle">
+                <div class="col-2 mt-2">
+                  <% if(article.profile != "null"){%>
+                    <img src="<%= article.profile %>" alt="Profile" width="30px" height="30px">
+                <% } else {  %>
+                    <img src="images/unknown.png" alt="unknown profile" width="30px" height="30px">
+                <% } %>
+                </div>
+                <div class="col-9">
+                  <span class="fw-bold fs-5"><%= article.user_name %></span> <br>
+                  <span><%= article.user_role %></span> &nbsp;
+                  <i>3 hours ago</i>
+                </div>
+              </div>
+            </div> 
+            <% if(article.userid === profile.user_id || profile.user_role === "admin"){ %>
+            <div class="col-3"> 
+              <div class="dropdown ">
+                <span class="dropdown-toggle text-end d-block fs-3" id="dropdownMenuButton" data-bs-toggle="dropdown">
+                </span>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="/article/process/<%=article.article_id%>">process</a>
+                  <a class="dropdown-item" href="/article/done/<%=article.article_id%>">done</a>
+                  <a class="dropdown-item" href="/article/edit/<%=article.article_id%>">edit</a>
+                  <a class="dropdown-item" href="/article/delete/<%=article.article_id%>">delete</a>
+                </div>
+              </div>  
+            </div>
+            <% } %>
+          </div>
+          <hr>
+          <div class="articleContent ms-4">
+            <p>
+              <%= article.article_content %>
+            </p>
+
+          </div>
+          <div class="text-end commentBtn my-2"  data-id="comment_<%=article.article_id%>">
+            <button class="btn btn-dark btn-sm me-2 cmtBtn" >Comment</button>
+          </div>
+          <!-- Comment for done-->
+         
+          <div class="articleCommentSection row  px-2 my-2 d-none">
+            <hr>
+            <div class="row py-1">
+              <div class="col-1">
+                <% if(profile.profile != "null"){%>
+                  <img src="<%= profile.profile %>" alt="Profile" width="30px" height="30px">
+              <% } else {  %>
+                  <img src="images/unknown.png" alt="unknown profile" width="30px" height="30px">
+              <% } %>
+              </div>
+              <div class="col-11 ">
+                <button class="addCommentBtn w-100 text-start addComment" data-id="<%=article.article_id%>">Comment here !</button>
+                <form action="/comments/add/<%=article.article_id%>" method="post" class="form d-none" data-id="<%=article.article_id%>">
+                  <textarea name="comment_content" id="newcomment" cols="30" rows="4" class="form-control"
+                    placeholder="Comment here"></textarea> <br>
+                  <input type="submit" value="Send" class="btn btn-success">
+                  <button class="btn btn-primary commentCancel" data-id="<%=article.article_id%>">Cancel</button>
+                </form>
+              </div>
+            </div>
+            <% comment.forEach((comment, index) => { %>
+            <% if(comment.article_id === article.article_id){ %>
+            <div class="articleComment bg-light my-2">
+              <div class="row cmtNav ">
+                <div class="col-8">
+                  <div class="row userComment">
+                    <div class="col-2 mt-2">
+                      <% if(comment.profile != "null"){%>
+                        <img src="<%= comment.profile %>" alt="Profile" width="30px" height="30px">
+                    <% } else {  %>
+                        <img src="images/unknown.png" alt="unknown profile" width="30px" height="30px">
+                    <% } %>
+                    </div>
+                    <div class="col-9">
+                      <span class="fw-bold"><%= comment.user_name %></span> &nbsp;
+                      <span ><%= comment.user_role %></span> <br>
+                      <i>3 hours ago</i>
+                    </div>
+                  </div>
+                </div>
+                
+                <% if(comment.user_id == profile.user_id || article.userid == profile.user_id){ %>
+                <div class="col-3">
+                  <div class="dropdown ">
+                    <span class="dropdown-toggle text-end d-block fs-3" id="dropdownMenuButton"
+                      data-bs-toggle="dropdown">
+                    </span>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item cmtEditBtn" data-id="<%= comment.comment_id %>" >edit</a>
+                      <a class="dropdown-item" href="/comments/delete/<%=comment.comment_id%>">delete</a>
+                    </div>
+                  </div>
+                </div>
+                <% } %>
+              </div>
+             
+              <div class="articleContent ms-4  py-1">
+                <p class="articlePara" data-id="<%= comment.comment_id%>">
+                  <%= comment.comment_content %> <br>
+                </p>
+                <form class="d-none cmtEditForm" data-id="<%= comment.comment_id %>">
+                  <textarea name="comment_content" id="newcomment" rows="3" cols="25" class="form-control commentedit" placeholder="Comment here"  data-id="<%= comment.comment_id%>"></textarea> <br>
+                  <input type="submit" value="Edit" class="btn btn-success">
+                  <button class="btn btn-primary cmtEditCancel" data-id="<%=comment.comment%>">Cancel</button>
+                 </form>
               </div>
             </div>
             <% }  }) %> <!--comment for done end -->
-          </div>         
-        </div>     
-        <% }  }) %> <!--  done end-->
+            
+          </div>
+         
+        </div>
+      
+        <% }  }) %> <!-- done article end-->
+
       </div>
     </div>
   </section>
@@ -384,7 +449,6 @@
       $(".addComment").click((e) => {
         var id = $(e.target).data('id');
         console.log(id);
-        // var id= $(e.target).par
         $(`form[data-id=${id}]`).toggleClass('d-none');
         $(`.addComment[data-id=${id}]`).toggleClass('d-none');
       })
@@ -395,7 +459,43 @@
         $(`form[data-id=${id}]`).toggleClass('d-none');
         $(`.addComment[data-id=${id}]`).toggleClass('d-none');
       })
-      // *********** -- End -- *****************//
+      //comment edit form show
+      $(".cmtEditBtn").click((e) => {
+        var id = $(e.target).data('id');
+        var comment = $(`p[data-id=${id}]`).text();
+        console.log("id :", id);
+        console.log("comment :", comment);
+        $(`p[data-id=${id}]`).toggleClass('d-none');
+        $(`p[data-id=${id}]+form`).toggleClass('d-none');
+        $(`textarea[data-id=${id}]`).val(comment)
+      })
+
+      // comment edit submit
+      $(".cmtEditForm").submit((e) => {
+        e.preventDefault();
+        var id = $(e.target).data('id');
+       $.ajax({
+         type : 'PUT',
+         url : '/comments/edit/'+id,
+         data : { comment_content : $(`textarea[data-id=${id}]`).val() },
+         success: function (data) {
+          if(data.content) {
+            $(`p[data-id=${id}]`).toggleClass('d-none');
+            $(`p[data-id=${id}]+form`).toggleClass('d-none');
+            $(`p[data-id=${id}]`).text(data.content)
+          }
+          console.log(data);
+        }
+
+       })
+      })
+      // comment edit cancel
+      $(".cmtEditCancel").click((e) => {
+        var id = $(e.target).data('id');
+        $(`p[data-id=${id}]`).toggleClass('d-none');
+        $(`p[data-id=${id}]+form`).toggleClass('d-none');
+      })
+
     })
     function openNav(){
     $("#mySidenav").css("width","30%");

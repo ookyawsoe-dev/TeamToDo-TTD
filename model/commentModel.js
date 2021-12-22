@@ -23,7 +23,7 @@ const connection = mysql.createConnection({
 
 // read comment
 exports.readComment = (callback) => {
-    connection.query('SELECT comment.comment_id,comment.user_id,comment.article_id,comment.comment_content, user.user_name,user.user_role FROM comment INNER JOIN user ON comment.user_id = user.user_id', (err, result)=>{ 
+    connection.query('SELECT comment.comment_id,comment.user_id,comment.article_id,comment.comment_content,user.profile, user.user_name,user.user_role FROM comment INNER JOIN user ON comment.user_id = user.user_id', (err, result)=>{ 
         if(err){
             console.log(err);
         }else{
@@ -46,6 +46,17 @@ exports.addComment = ( {articleId, userId, content }, callback) => {
 //delete comment 
 exports.deleteComment = (commentId, callback) => {
     connection.query(`DELETE FROM comment WHERE comment_id = ?`, [commentId], (err, results) => {
+        if(err){
+            console.log(err);
+        }else{
+            callback(err, results);
+        }
+    })
+}
+
+//editComment
+exports.editComment = (commentId, content, callback) => {
+    connection.query(`UPDATE comment SET comment_content=? WHERE comment_id=?`, [content, commentId], (err, results) => {
         if(err){
             console.log(err);
         }else{
