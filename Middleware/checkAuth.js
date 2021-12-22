@@ -1,7 +1,8 @@
 'use strict';
 
 module.exports = (req, res, next) => {
-    if (req.session.user) {
+    console.log("session",req.session);
+    if (req.session.isLoggedIn) {
         next();
     }
     else{

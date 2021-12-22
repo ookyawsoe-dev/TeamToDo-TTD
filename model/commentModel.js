@@ -53,3 +53,14 @@ exports.deleteComment = (commentId, callback) => {
         }
     })
 }
+
+//editComment
+exports.editComment = (commentId, content, callback) => {
+    connection.query(`UPDATE comment SET comment_content=? WHERE comment_id=?`, [content, commentId], (err, results) => {
+        if(err){
+            console.log(err);
+        }else{
+            callback(err, results);
+        }
+    })
+}

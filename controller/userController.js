@@ -41,10 +41,10 @@ exports.login = (req, res, next) => {
                 console.log(err);
             }else{
                 if(results[0]){
-                    console.log(req.session);
+                    
                     req.session.user = results[0];
                     req.session.isLoggedIn = true;
-                    console.log(req.session);
+                    console.log('post login', req.session);
                     res.redirect('/');
                 }else{
                     res.render('login',{ layout: false , message : "Username or Password is incorrect"})
@@ -53,6 +53,7 @@ exports.login = (req, res, next) => {
         })
     } 
 }
+
 
 // logout
 exports.logout = (req, res) => {
