@@ -27,7 +27,7 @@ exports.user = (callback) => {
 
 // register
 exports.register = (params, callback) => {
-    connection.query(`INSERT INTO user(user_name,name, email, profile, password,user_role, user_created_date) VALUES ("${ params.username }","${ params.full_name }","${ params.email }","${ params.profile }","${ params.password}","${ params.user_role }", CURRENT_TIMESTAMP())`, 
+    connection.query(`INSERT INTO user(user_name,name, email, profile, password,user_role, user_created_date) VALUES(?,?,?,?,?,?,CURRENT_TIMESTAMP())`,[params.username,params.full_name, params.email, params.profile, params.password, params.user_role], 
     (err, results) => {
      if(err){
          console.log(err);

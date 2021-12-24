@@ -3,7 +3,7 @@ const articleModel = require('../model/articleModel');
 const commentModel = require('../model/commentModel');
 const auth = require('../Middleware/checkAuth');
 const { param } = require('../routes');
-
+const moment = require('moment');
 
 
 // index file rendering
@@ -16,10 +16,8 @@ exports.readarticle = (req, res, next) => {
                 if(err){
                     console.log(err);
                 }else{
-                    console.log(article);
-                    console.log(comment);
                     var profile = req.session.user;
-                    res.render('index', { article: article, comment : comment, profile : profile, layout : false});
+                    res.render('index', { article: article, comment : comment, profile : profile,moment : moment, layout : false});
                 }
             })
         } 

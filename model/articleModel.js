@@ -2,7 +2,7 @@ const mysql = require('mysql2');
 const dotenv = require('dotenv');
 const { done } = require('../controller/articleController');
 dotenv.config();
-
+const moment = require('moment');
 
 // create the connection to database
 const connection = mysql.createConnection({
@@ -27,7 +27,7 @@ connection.connect((error) => {
 
 // read article
 exports.readarticle = (callback) => {
-    connection.query('SELECT article.article_id, article.userid, article.article_content, article.article_role, article.article_created_date, user.user_name,user.profile,user.user_role FROM article INNER JOIN user ON article.userid=user.user_id', (err, result)=>{ 
+    connection.query('SELECT article.article_id, article.userid, article.article_content, article.article_role,  article.article_created_date AS time, user.user_name,user.profile,user.user_role FROM article INNER JOIN user ON article.userid=user.user_id', (err, result)=>{ 
         if(err){
             console.log(err);
         }else{
