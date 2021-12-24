@@ -23,10 +23,12 @@ const connection = mysql.createConnection({
 
 // read comment
 exports.readComment = (callback) => {
-    connection.query('SELECT comment.comment_id,comment.user_id,comment.article_id,comment.comment_content,user.profile, user.user_name,user.user_role FROM comment INNER JOIN user ON comment.user_id = user.user_id', (err, result)=>{ 
+    connection.query('SELECT comment.comment_id,comment.user_id,comment.article_id,comment.comment_content,comment.comment_created_date AS time, user.profile, user.user_name,user.user_role FROM comment INNER JOIN user ON comment.user_id = user.user_id', (err, result)=>{ 
         if(err){
             console.log(err);
         }else{
+            console.log(result[0].user_id);
+            console.log(result[0].time);
             callback(err, result);
         }
     });
