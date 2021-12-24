@@ -33,7 +33,7 @@ var sessionStore = new MySQLStore({}, connection);
 app.use(session({
   name: 'tdd_id',
   secret: 'tdd2021',
-  resave: true,
+  resave: false,
   store: sessionStore,
   saveUninitialized: false,
 }));

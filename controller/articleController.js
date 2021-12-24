@@ -16,9 +16,11 @@ exports.readarticle = (req, res, next) => {
                 if(err){
                     console.log(err);
                 }else{
+                     var profile = req.session.user;
                     console.log(article);
                     console.log(comment);
-                    var profile = req.session.user;
+                    console.log(profile);
+                   
                     res.render('index', { article: article, comment : comment, profile : profile, layout : false});
                 }
             })
