@@ -32,8 +32,8 @@ var sessionStore = new MySQLStore({}, connection);
 // Session Management
 app.use(session({
   name: 'tdd_id',
-  secret: 'tdd-2021',
-  resave: true,
+  secret: 'tdd2021',
+  resave: false,
   store: sessionStore,
   saveUninitialized: false,
 }));
